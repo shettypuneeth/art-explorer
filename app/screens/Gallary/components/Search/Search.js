@@ -4,7 +4,8 @@ import {View, StyleSheet, TextInput} from 'react-native';
 import PropTypes from 'prop-types';
 
 type Props = {
-  onSubmit: (query: string) => void
+  onSubmit: (query: string) => void,
+  query: string
 };
 type State = {
   query: string
@@ -13,10 +14,10 @@ type State = {
 class Search extends Component<Props, State> {
   handleChange: Function;
   handleSubmit: Function;
-  constructor() {
-    super();
+  constructor(props: Props) {
+    super(props);
     this.state = {
-      query: ''
+      query: props.query
     };
     
     this.handleChange = this.handleChange.bind(this);

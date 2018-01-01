@@ -15,6 +15,7 @@ type Props = {
     navigate: Object,
     state: {
       params: {
+        query: string,
         artwork: ArtworkType
       }
     }
@@ -29,10 +30,16 @@ class Exhibit extends Component<Props> {
   }
 
   _onClosePressed() {
-    const { navigate } = this.props.navigation;
+    // Poor way to pass the props between the views.
+    // Idealy you would have a state management system like Redux or Mobx 
+    //  handling the Data storage that is idependent of the view.
+    const { navigation: { state, navigate } } = this.props;
+    const { params: { query } } = state;
 
     // $FlowFixMe Add types for navigate method    
-    navigate('Gallary');
+    navigate('Gallary', {
+      query
+    });
   }
   
   _renderBackground(artwork: ArtworkType) {

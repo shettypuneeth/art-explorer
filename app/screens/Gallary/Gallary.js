@@ -15,11 +15,19 @@ import { fetchArtifacts } from "../../api/harvard-art";
 import type { ArtworkType } from '../types/Gallary';
 
 type Props = {
-  navigation: Object
+  navigation: {
+    navigate: Object,
+    state: {
+      params: {
+        query: string
+      }
+    }
+  }
 };
 type State = {
   isLoading: boolean,
   error: Object | null,
+  query: string,
   artworks: Array<ArtworkType>,
 };
 
@@ -27,13 +35,19 @@ class Gallary extends Component<Props, State> {
   handleArtworkPress: Function;
   handleSubmit: Function;
   _fetchItems: Function;
-  state = {
-    isLoading: false,
-    artworks: [],
-    error: null
-  };
-  constructor() {
-    super();
+
+  constructor(props: Props) {
+    super(props);
+    const { navigation: { state } } = this.props;
+    const { params } = state;
+    const query = params ? params.query : '';
+
+    this.state = {
+      query,
+      isLoading: false,
+      artworks: [],
+      error: null
+    };
     this.handleArtworkPress = this.handleArtworkPress.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this._fetchItems = this._fetchItems.bind(this);
@@ -59,9 +73,20 @@ class Gallary extends Component<Props, State> {
   }
 
   componentDidMount() {
-    const options = {};
+    const options = {
+      keyword: this.state.query
+    };
 
     this._fetchItems(options);
+  }
+
+  componentDidUpdate(prevProps: Props, prevState: State) {
+    if (prevState.query !== this.state.query) {
+      const options = {
+        keyword: this.state.query
+      };
+      this._fetchItems(options);
+    }
   }
 
   handleArtworkPress(artwork: ArtworkType): void {
@@ -69,23 +94,23 @@ class Gallary extends Component<Props, State> {
 
     // $FlowFixMe Add types for navigate method    
     navigate('Exhibit', {
-      artwork
+      artwork,
+      query: this.state.query
     });
   }
 
   handleSubmit(keyword: string) {
-    const options = {
-      keyword
-    };
-
-    this._fetchItems(options);
+    this.setState({ query: keyword });
   }
   
   render() {
     return (
       <View style={{flex: 1}}>
         <Header />
-        <Search onSubmit={this.handleSubmit} />
+        <Search
+          query={this.state.query}
+          onSubmit={this.handleSubmit}
+        />
         <ArtworkGrid
           error={this.state.error}
           artworks={this.state.artworks}
