@@ -1,7 +1,7 @@
 # Art Explorer
 React Native app that lets you explore the art works from [`Harvard Art Museum`](https://www.harvardartmuseums.org/)
 
-##Demo
+## Demo
 ![](./demo-android.gif)
 
 ## Getting Started
