@@ -1,5 +1,5 @@
 # Art Explorer
-React Native app that lets you explore the art works from [Harvard Art Museum]('https://www.harvardartmuseums.org/')
+React Native app that lets you explore the art works from [`Harvard Art Museum`](https://www.harvardartmuseums.org/)
 
 ## Getting Started
 
@@ -34,6 +34,6 @@ $ npm start
 
 
 ## Acknowledgments
-1. [Harvard Art Museum]('https://www.harvardartmuseums.org/') for all the artworks data.
-2. [react-native-parallax-scroll-view]('https://github.com/i6mi6/react-native-parallax-scroll-view') from [Alexander Vitanov]('https://github.com/i6mi6')
-3. [react-navigation]('https://reactnavigation.org/') for routing.
+1. [`Harvard Art Museum`](https://www.harvardartmuseums.org/) for all the artworks data.
+2. [`react-native-parallax-scroll-view`](https://github.com/i6mi6/react-native-parallax-scroll-view) from [`Alexander Vitanov`](https://github.com/i6mi6)
+3. [`react-navigation`](https://reactnavigation.org/) for routing.
